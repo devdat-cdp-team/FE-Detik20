@@ -1,0 +1,53 @@
+.carouselContainer {
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+}
+
+.carouselTitleContainer {
+    position: relative;
+    border-bottom: 2px solid #D0D0D0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.carouselTitle {
+    color: #555555;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+.carouselTitleSelected {
+    color: #000000;
+    font-weight: 700;
+    height: 100%;
+
+}
+
+.line {
+    position: absolute;
+    bottom: -2px;
+    width: 100px;
+    background-color: #000000;
+    height: 4px;
+    border-radius: 2px;
+    transition: 0.3s;
+    /* left: 100px; */
+}
+
+.carouselPageContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: max-content;
+    transition: 0.3s;
+    overflow-y: scroll;
+}
+
+.carouselPage {
+    height: min-content;
+}

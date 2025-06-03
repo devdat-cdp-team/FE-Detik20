@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    scroll-behavior: smooth;
+    font-family: "Poppins", sans-serif;
+}
+
+.home-button {
+    --btn-color: #2D4059;
+    --btn-hover-color: #2D4059;
+    border-color: var(--btn-color);
+    color: var(--btn-color);
+    transition: all 0.3s;
+    &:hover {
+        box-shadow: inset 20vw 0 0 0 var(--btn-hover-color),
+                    inset -20vw 0 0 0 var(--btn-hover-color);
+        border-color: var(--btn-hover-color);
+        color: #FFFFFF;
+    }
+}
+
+.home-button.active {
+    color: #FFFFFF;
+    background-color: #2D4059;
+}
+
+.attribute-table tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.attribute-table tr:nth-child(even) {
+    background-color: #F5F5F5;
+}
+
+.spinner .spin-icon {
+    border: solid 3px transparent;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    border-radius: 80px;
+
+    -webkit-animation: spinner 500ms linear infinite;
+    -moz-animation: spinner 500ms linear infinite;
+    -ms-animation: spinner 500ms linear infinite;
+    -o-animation: spinner 500ms linear infinite;
+    animation: spinner 500ms linear infinite;
+}
+
+.loading-spinner .spin-icon {
+    border: solid 3px transparent;
+    border-top-color: #2D4059;
+    border-left-color: #2D4059;
+    border-radius: 80px;
+
+    -webkit-animation: spinner 500ms linear infinite;
+    -moz-animation: spinner 500ms linear infinite;
+    -ms-animation: spinner 500ms linear infinite;
+    -o-animation: spinner 500ms linear infinite;
+    animation: spinner 500ms linear infinite;
+}
+
+@-webkit-keyframes spinner {
+    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-moz-keyframes spinner {
+    0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-o-keyframes spinner {
+    0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-ms-keyframes spinner {
+    0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); transform: rotate(0deg); }
+    100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
