@@ -217,30 +217,52 @@ export default function Result({
         }
     }, [isShowVideo])
 
+    // useEffect(() => {
+    //     if (data[shareIds[currDataIndex]]?.result) {
+    //         let variable = Tables[detailIndex].var;
+
+    //         let temp = data[shareIds[currDataIndex]]?.result?.[variable].map((e, index) => {
+    //             let temp = [];
+    //             for (let i = 0; i < e.instances.length; i++) {
+    //                 let start = parseInt(e.instances[i].start.split(":")[0])*3600 + parseInt(e.instances[i].start.split(":")[1])*60 + parseFloat(e.instances[i].start.split(":")[2])
+    //                 let end = parseInt(e.instances[i].end.split(":")[0])*3600 + parseInt(e.instances[i].end.split(":")[1])*60 + parseFloat(e.instances[i].end.split(":")[2])
+    //                 temp.push({
+    //                     id: e.id,
+    //                     start: start,
+    //                     end: end,
+    //                     name: e.name,
+    //                     object: e.displayName,
+    //                     text: e.text
+    //                 })
+    //             }
+    //             return temp;
+    //         })
+    //         setTimelineData([...temp])
+    //     }
+        
+    // }, [data, currDataIndex, detailIndex])
+
     useEffect(() => {
         if (data[shareIds[currDataIndex]]?.result) {
             let variable = Tables[detailIndex].var;
 
-            let temp = data[shareIds[currDataIndex]]?.result?.[variable].map((e, index) => {
-                let temp = [];
-                for (let i = 0; i < e.instances.length; i++) {
-                    let start = parseInt(e.instances[i].start.split(":")[0])*3600 + parseInt(e.instances[i].start.split(":")[1])*60 + parseFloat(e.instances[i].start.split(":")[2])
-                    let end = parseInt(e.instances[i].end.split(":")[0])*3600 + parseInt(e.instances[i].end.split(":")[1])*60 + parseFloat(e.instances[i].end.split(":")[2])
-                    temp.push({
+            let temp = data[shareIds[currDataIndex]]?.result?.[variable]?.map((e, index) => {
+                return e.instances.map((instance) => {
+                    return {
                         id: e.id,
-                        start: start,
-                        end: end,
-                        name: e.name,
-                        object: e.displayName,
-                        text: e.text
-                    })
-                }
-                return temp;
-            })
-            setTimelineData([...temp])
+                        start: parseFloat(instance.start),
+                        end: parseFloat(instance.end),
+                        name: e.name || "",
+                        object: e.displayName || "",
+                        text: e.text || ""
+                    };
+                });
+            });
+
+            setTimelineData([...temp]);
         }
-        
-    }, [data, currDataIndex, detailIndex])
+    }, [data, currDataIndex, detailIndex]);
+
 
    
     const onVideoReady = useCallback((player) => {
@@ -267,17 +289,46 @@ export default function Result({
         }
     }
 
+    // const jumpTo = (label) => {
+    //     let instances = label.instances;
+    //     let i = 0;
+    //     let id = label.id;
+    //     console.log("jumpto: ", instances, id)
+    //     if (appearanceId == -1) {
+            
+    //     } else {
+    //         if (appearanceId.id == label.id) {
+    //             if (label.instances.length - 1 > appearanceId.index) {
+    //                 i = appearanceId.index+1;
+    //             } else {
+    //                 i = 0;
+    //             }
+    //         } else {
+    //             id = label.id;
+    //         }
+    //     }
+    //     setAppearanceId({
+    //         id: id,
+    //         index: i,
+    //     })
+
+    //     let start = parseInt(instances[i].start.split(":")[0])*3600 + parseInt(instances[i].start.split(":")[1])*60 + parseFloat(instances[i].start.split(":")[2])
+    //     if (playerRef?.current && isPlayerReady) {
+    //         playerRef.current.seekTo(start, "seconds")
+    //     }
+    // }
+
     const jumpTo = (label) => {
         let instances = label.instances;
         let i = 0;
         let id = label.id;
-        console.log("jumpto: ", instances, id)
+
         if (appearanceId == -1) {
             
         } else {
             if (appearanceId.id == label.id) {
                 if (label.instances.length - 1 > appearanceId.index) {
-                    i = appearanceId.index+1;
+                    i = appearanceId.index + 1;
                 } else {
                     i = 0;
                 }
@@ -285,16 +336,19 @@ export default function Result({
                 id = label.id;
             }
         }
+
         setAppearanceId({
             id: id,
             index: i,
-        })
+        });
 
-        let start = parseInt(instances[i].start.split(":")[0])*3600 + parseInt(instances[i].start.split(":")[1])*60 + parseFloat(instances[i].start.split(":")[2])
+        let start = parseFloat(instances[i].start);
+
         if (playerRef?.current && isPlayerReady) {
-            playerRef.current.seekTo(start, "seconds")
+            playerRef.current.seekTo(start, "seconds");
         }
-    }
+    };
+
 
     const onClickRight = () => {
         if (currDataIndex < shareIds.length - 1) {
