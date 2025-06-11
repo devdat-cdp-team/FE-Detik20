@@ -231,7 +231,7 @@ function AttributeSearchForm() {
                                                         <div key={idx} className="relative inline-block mx-1 group">
                                                             <span className="underline cursor-help">{obj.category}</span>
                                                             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
-                                                                {obj.value}
+                                                                {obj.value.join(", ")}
                                                             </div>
                                                         </div>
                                                     ))}
