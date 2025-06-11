@@ -9,7 +9,7 @@ function AttributeSearchPage() {
             <div className="">
                 <AttributeSearchForm />
             </div>
-            <Footer position="lg:fixed" />
+            {/* <Footer position="lg:fixed" /> */}
         </>
     )
 }

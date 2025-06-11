@@ -31,7 +31,7 @@ function Dashboard() {
                 </div>
             </div>
 
-            <Footer position="lg:fixed" />
+            {/* <Footer position="lg:fixed" /> */}
         </>
     )
 }

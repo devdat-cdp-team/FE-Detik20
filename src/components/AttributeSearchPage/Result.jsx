@@ -14,7 +14,7 @@ import arrowDropdown from '../../assets/icons/arrow-dropdown.svg';
 import ColoredTable from "../Elements/ColoredTable/ColoredTable";
 
 const Tables = [
-    {title: "People", var: "video_faces", colomns: [{label: "People", var: "name"}, {label: "Appearance", var: "instances"}]},
+    // {title: "People", var: "video_faces", colomns: [{label: "People", var: "name"}, {label: "Appearance", var: "instances"}]},
     {title: "Label", var: "video_labels", colomns: [{label: "Label", var: "name"}, {label: "Language", var: "language"}, {label: "Appearance", var: "Instances"}]},
     {title: "Object", var: "video_objects", colomns: [{label: "Object", var: "displayName"}, {label: "Appearance", var: "instances"}]},
     {title: "Text", var: "video_ocr", colomns: [{label: "Text", var: "text"}, {label: "Language", var: "language"}, {label: "Confidence", var: "confidence"}, {label: "Appearance", var: "instances"}]},
@@ -647,7 +647,7 @@ export default function Result({
                 </div>
 
             </div>     
-            <Footer position="lg:fixed" />
+            {/* <Footer position="lg:fixed" /> */}
         </>
     )
 }

@@ -154,6 +154,7 @@ function AttributeSearchForm() {
                         <div
                             className="flex justify-end items-center"
                         >
+                            <p className="text-color-1 xxs:mr-1.5 xxs:text-xs lg:mr-2 lg:text-sm">Advance Search</p>
                             <Toggle
                                 width={40}
                                 height={18}
@@ -165,7 +166,7 @@ function AttributeSearchForm() {
                             />
                         </div>
                         <div className="flex justify-between items-center xxs:mt-3 lg:mt-6">
-                            <form action="" className="flex w-full mr-1.5">
+                            <form action="" className={`flex w-full ${advanceSearch ? "mr-1.5" : ""}`}>
                                 <input 
                                     type="text" 
                                     className="w-full border border-color-4 xxs:py-1 xxs:text-xs xxs:rounded-l-md xxs:px-3 lg:py-1.5 lg:text-base" 
@@ -194,54 +195,54 @@ function AttributeSearchForm() {
                         </div>
                     </div>
                     
-                    <div className="relative rounded-md xxs:mt-3 xxs:text-[10px] xs:text-xs sm:text-xs lg:mt-6 lg:text-sm " style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}>
-                        <table className="attribute-table min-w-full text-center text-color-2 overflow-y-auto">
-                            <thead>
-                                <tr
-                                    className="w-full xxs:font-normal sm:font-bold text-white sticky"
-                                    style={{
-                                        backgroundColor: "#2D4059",
-                                        top: 0,
-                                    }}
-                                >
-                                    <th scope="col" className="xxs:py-1 sm:py-2 lg:py-3">
-                                        Title
-                                    </th>
-                                    <th scope="col" className="xxs:py-1 sm:py-2 lg:py-3">
-                                        Details
-                                    </th>
+                    <div className="relative overflow-x-auto rounded-md overflow-y-auto max-h-[20em] xxs:mt-3 xxs:text-[10px] xs:text-xs sm:text-xs lg:text-sm lg:mt-6" style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px', maxHeight: '20em', overflowY: 'auto' }}>
+                        <table className="attribute-table table-auto min-w-full text-center text-color-2">
+                            <thead className="xxs:font-normal sm:font-bold text-white bg-color-1">
+                                <tr>
+                                    <th scope="col" className="bg-color-1 xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3">Title</th>
+                                    <th scope="col" className="bg-color-1 xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3">Matched Keyword Category</th>
+                                    <th scope="col" className="bg-color-1 xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3">Details</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="text-center">
                                 {searchLoading ? (
-                                    <td colSpan={2}>
-                                        <div className="flex justify-center items-center xxs:py-1 sm:py-2 lg:py-3">
-                                            <div className="loading-spinner inline relative z-50">
-                                                <div className="spin-icon m-auto animate-spin xxs:text-xs xxs:w-4 xxs:h-4 lg:text-base lg:w-6 lg:h-6"></div>
+                                    <tr>
+                                        <td colSpan={3}>
+                                            <div className="flex justify-center items-center xxs:py-1 sm:py-2 lg:py-3">
+                                                <div className="loading-spinner inline relative z-50">
+                                                    <div className="spin-icon m-auto animate-spin xxs:text-xs xxs:w-4 xxs:h-4 lg:text-base lg:w-6 lg:h-6"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                    </tr>
                                 ) : (
                                     searchResult.length > 0 ? (
                                         searchResult.map((result, index) => {
                                             return (
                                                 <tr className="w-full">
-                                                    <td>
-                                                        <p className="font-medium text-center text-gray-500 whitespace-pre-wrap break-words xxs:py-1 sm:py-2 lg:py-3">
-                                                            {result.title}
-                                                        </p>
+                                                    <td className="text-center whitespace-pre-wrap break-words xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3">
+                                                        {result.title}
+                                                    </td>
+                                                    {/* <td className="text-center whitespace-pre-wrap break-words xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3">
+                                                        {result.matched_obj.map(obj => obj.category).join(", ")}
+                                                    </td> */}
+                                                    <td className="text-center whitespace-pre-wrap break-words xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3">
+                                                    {result.matched_obj.map((obj, idx) => (
+                                                        <div key={idx} className="relative inline-block mx-1 group">
+                                                            <span className="underline cursor-help">{obj.category}</span>
+                                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                                                                {obj.value}
+                                                            </div>
+                                                        </div>
+                                                    ))}
                                                     </td>
                                                     <td className="underline text-[#0000EE] cursor-pointer xxs:px-1 xxs:py-1 sm:px-3 sm:py-2 lg:px-6 lg:py-3" onClick={() => {showDetails(result)}}>Details</td>
                                                 </tr>
                                             )
                                         })
                                     ) : (
-                                        <td colSpan={2}>
-                                            <p className="font-medium text-center text-gray-500 xxs:py-1 sm:py-2 lg:py-3"
-                                                style={{
-                                                    width: "min(1536px, calc(75vw - 3px))"
-                                                }}
-                                            >
+                                        <td colSpan={3}>
+                                            <p className="text-center whitespace-pre-wrap break-words xxs:py-1 sm:py-2 lg:py-3">
                                                 There are no data available
                                             </p>
                                         </td>
@@ -249,21 +250,6 @@ function AttributeSearchForm() {
                                 )}
                             </tbody>
                         </table>
-                    </div>
-
-                    <div className={`flex justify-center xxs:mt-5 lg:mt-5`}>
-                        <div 
-                            // onClick={() => {fetchCreativeSimilarityAPI(false)}} 
-                            className={`button text-center xxs:w-full text-white xxs:py-1 xxs:text-xs xxs:rounded-md lg:py-2 lg:text-base lg:rounded-lg ${enableButton ? "bg-color-1 cursor-pointer" : "bg-color-3 cursor-not-allowed"}`}
-                        >
-                            {loading ?
-                                <div className="spinner inline relative z-50">
-                                    <div className="spin-icon m-auto animate-spin xxs:text-xs xxs:w-4 xxs:h-4 lg:text-base lg:w-6 lg:h-6"></div>
-                                </div>
-                                : 
-                                "Analyze Now"
-                            }
-                        </div>
                     </div>
                 </div>
             </div>

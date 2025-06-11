@@ -9,7 +9,7 @@ function VideoAnalyticsPage() {
             <div className="flex justify-center">
                 <VideoAnalyticsForm />
             </div>
-            <Footer position="xxs:fixed" />
+            {/* <Footer position="xxs:fixed" /> */}
         </div>
     );
 }

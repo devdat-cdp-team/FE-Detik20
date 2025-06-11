@@ -14,6 +14,20 @@ function Navbar() {
 
     const [activeProfile, setActiveProfile] = useState(false);
 
+    const pathOption = [
+        { value: "/video-analysis", label: "Video Analysis" }, 
+        { value: "/attribute-search", label: "Attribute Search" }
+    ]
+
+    const defaultValue = pathOption.find(option => location.pathname.startsWith(option.value.split("?")[0])) || pathOption[0];
+
+    const handleNavigatePath = (event) => {
+        const selectedPath = event.target.value;
+        if (selectedPath) {
+            navigate(selectedPath);
+        }
+    };
+
     const handleLogout = () => {
         global.setToken(null);
         window.localStorage.setItem("permissions", null);
@@ -27,10 +41,27 @@ function Navbar() {
                     <img src={ logo } alt={ logo } />
                 </div> */}
 
-                <div className="lg:w-full">
+                <div className="flex lg:w-full">
                     <a href="/">
                         <img src={ logo } alt="" className="xxs:w-5 sm:w-6 lg:w-10" />
                     </a>
+                    {location.pathname !== "/" && (
+                        <div className={`rounded-lg mx-5`}>
+                            <select
+                                name=""
+                                id=""
+                                className='font-bold text-color-1 border-2 border-color-1 rounded-lg xxs:text-xs xxs:p-1 lg:text-sm lg:p-2 lg:w-[250px]'
+                                value={defaultValue?.value}
+                                onChange={handleNavigatePath}
+                            >
+                                {pathOption.map((item, index) => {
+                                    return (
+                                        <option key={index} value={item.value}>{item.label}</option>
+                                    );
+                                })}
+                            </select>
+                        </div>
+                    )}
                 </div>
                 
                 <div onClick={handleLogout} className='flex items-center font-bold cursor-pointer'>

@@ -9,7 +9,7 @@ function ResultPage() {
             <div className="">
                 <Result />
             </div>
-            <Footer position="lg:fixed" />
+            {/* <Footer position="lg:fixed" /> */}
         </>
     )
 }
